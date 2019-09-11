@@ -1,5 +1,5 @@
 fn main() {
-    let upper_limit = 300000000;
+    let upper_limit = 120;
     let primes = prime_generator(upper_limit);
     println!("Primes below {}:\n", upper_limit);
     for i in primes.iter() {
@@ -16,7 +16,7 @@ fn prime_generator(max_value: usize) -> Vec<usize> {
         composite_flag.push(false);
     }
 
-    for i in 0..integer_set.len() {
+    for i in 0..integer_set.len() >> 1 {
         let mut current_multiple = 2;
         let current_value = integer_set[i];
         loop {
