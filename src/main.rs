@@ -7,7 +7,7 @@ fn main() {
     //}
     let number_to_test = 67280421310721;
     println!("Is {} prime? {}", number_to_test, 
-    if trial_division_primality_test(number_to_test) { "Yes" } else { "No" });
+    if trial_division_optimized_primality_test(number_to_test) { "Yes" } else { "No" });
 }
 
 fn sieve_of_eratosthenes_prime_generator(max_value: usize) -> Vec<usize> {
@@ -51,4 +51,22 @@ fn trial_division_primality_test(value: usize) -> bool {
     }
 
     return true;
+}
+
+fn trial_division_optimized_primality_test(value: usize) -> bool {
+    if value <= 3 {
+        return value > 1
+    } else if value % 2 == 0 || value % 3 == 0 {
+        return false;
+    } else {
+        let mut divisor = 5;
+        while divisor * divisor <= value {
+            if value % divisor == 0 || value % (divisor + 2) == 0 {
+                return false;
+            }
+            divisor += 6;
+        }
+
+        return true;
+    }
 }
