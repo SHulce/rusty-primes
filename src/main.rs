@@ -1,13 +1,16 @@
 fn main() {
-    let upper_limit = 120;
-    let primes = prime_generator(upper_limit);
-    println!("Primes below {}:\n", upper_limit);
-    for i in primes.iter() {
-        print!("{} ", i);
-    }
+    //let upper_limit = 120;
+    //let primes = sieve_of_eratosthenes_prime_generator(upper_limit);
+    //println!("Primes below {}:\n", upper_limit);
+    //for i in primes.iter() {
+    //    print!("{} ", i);
+    //}
+    let number_to_test = 67280421310721;
+    println!("Is {} prime? {}", number_to_test, 
+    if trial_division_primality_test(number_to_test) { "Yes" } else { "No" });
 }
 
-fn prime_generator(max_value: usize) -> Vec<usize> {
+fn sieve_of_eratosthenes_prime_generator(max_value: usize) -> Vec<usize> {
     let mut integer_set = Vec::new();
     let mut composite_flag = Vec::new();
 
@@ -40,3 +43,12 @@ fn prime_generator(max_value: usize) -> Vec<usize> {
     discovered_primes
 }
 
+fn trial_division_primality_test(value: usize) -> bool {
+    for i in 2..((value as f64).sqrt() as usize) {
+        if value % i == 0 {
+            return false;
+        }
+    }
+
+    return true;
+}
